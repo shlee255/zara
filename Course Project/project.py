@@ -1,19 +1,13 @@
-drivers = {}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# https://pandas.pydata.org/docs/getting_started/intro_tutorials/03_subset_data.html
 
 def overview(filename):
-	with open(filename)  as csvfile:
-		lines = csvfile.read().splitlines()
-
-	for line in lines:
-		data = line.split(",")
-		if data[0] in drivers:
-			drivers[data[0]] += 1
-		else:
-			drivers[data[0]] = 1
-
-	print(drivers)
-	print("For Record " + filename)
-	print("Number of Records: " + str(len(lines)) + ", Number of Drivers: " + str(len(drivers)))
+	df = pd.read_csv(filename,header = None, names=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20] )
+	#print(df)
+	df[5].plot()
+	plt.show()
 
 overview('COMP1012-Project-data/driving-records/detail_record_2017_01_02_08_00_00')
 overview('COMP1012-Project-data/driving-records/detail_record_2017_01_03_08_00_00')
