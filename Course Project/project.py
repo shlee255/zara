@@ -1,4 +1,3 @@
-datas = []
 drivers = {}
 
 def overview(filename):
@@ -6,16 +5,14 @@ def overview(filename):
 		lines = csvfile.read().splitlines()
 
 	for line in lines:
-		datas.append(line.split(","))
-
-	for data in datas:
+		data = line.split(",")
 		if data[0] in drivers:
-			drivers[data[0]] = drivers[data[0]] + 1
+			drivers[data[0]] += 1
 		else:
 			drivers[data[0]] = 1
 
 	print(drivers)
-	print(filename)
+	print("For Record " + filename)
 	print("Number of Records: " + str(len(lines)) + ", Number of Drivers: " + str(len(drivers)))
 
 overview('COMP1012-Project-data/driving-records/detail_record_2017_01_02_08_00_00')
