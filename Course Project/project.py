@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import datetime
 
 # https://pandas.pydata.org/docs/getting_started/intro_tutorials/03_subset_data.html
 
@@ -48,3 +49,21 @@ dataset = pd.concat(frames)
 print("There are " + str(len(dataset.driverID)) + " records and " + str(len(dataset.driverID.unique())) + " drivers")
 
 print(dataset)
+
+# speedAnalytics = dataset.groupby("Time")["Speed","carPlateNumber"].agg(Speed=('Speed', 'mean')).reset_index()
+
+# fig, ax = plt.subplots(figsize=(10,5))
+
+# speedAnalytics.set_index('Time', inplace=True)
+
+print(dataset['Time'].dtypes)
+
+dataset['Datetime'] = pd.to_datetime(dataset['Time'])
+dataset.set_index('Datetime')
+dataset.groupby('driverID')[['Speed']].plot(legend=True,title="Speed")
+
+#print(dataset['Datetime'].dtypes)
+#print(dataset.values.tolist())
+#print(dataset.groupby(['driverID'])[['Datetime','Speed']].values.tolist())
+#plt.plot()
+plt.show()
