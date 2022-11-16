@@ -24,7 +24,7 @@ def overview(filename):
 			"isFatigueDriving",
             "isHthrottleStop",
 			"isOilLeak",
-			"other"])
+			"other"]).fillna(value = 0)
 
 	print("There are " + str(len(df.driverID)) + " records and " + str(len(df.driverID.unique())) + " drivers in " + filename)
 	#print(df)
