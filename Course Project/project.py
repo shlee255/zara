@@ -46,7 +46,6 @@ frames = [
 	overview('COMP1012-Project-data/driving-records/detail_record_2017_01_11_08_00_00')]
 
 dataset = pd.concat(frames)
-
 print("There are " + str(len(dataset.driverID)) + " records and " + str(len(dataset.driverID.unique())) + " drivers")
 
 print(dataset)
@@ -54,13 +53,21 @@ print(dataset)
 # Plot Driver vs Speed
 speedData = dataset[["Time", "driverID", "Speed"]]
 speedData = speedData.drop_duplicates(["Time","driverID"])
+speedData['Time'] = pd.to_datetime(speedData['Time'], format='%Y-%m-%d %H:%M:%S') # 2017-01-01 08:00:20
 speedData = speedData.set_index("Time")
 print(speedData)
+
 speed_pivot = speedData.pivot(columns='driverID',values='Speed')
 print(speed_pivot)
 
 speed_pivot.to_csv('speed.csv')
 
+# speed_pivot.plot.area(figsize=(10,5),subplots=True,ylabel="Speed")
+speed_pivot.plot(figsize=(10,5),subplots=True,ylabel="Speed",marker='.') # ,linestyle='none')
+
+# plt.subplots(figsize=(10,1))
+# plt.plot(df.x, df.y, marker='.', linestyle='none')
+plt.show()
 #speedData = dataset[['Time',"driverID","Speed"]]
 #print(speedData)
 
